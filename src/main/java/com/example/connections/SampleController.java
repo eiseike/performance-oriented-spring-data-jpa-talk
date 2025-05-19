@@ -21,7 +21,7 @@ public class SampleController {
 
     @GetMapping("/external")
     void external() {
-        sampleService.withExternalServiceCall();
+        sampleService.withExternalServiceCall(); //auto-commit is baaad
     }
 
     @GetMapping("/external-after")
