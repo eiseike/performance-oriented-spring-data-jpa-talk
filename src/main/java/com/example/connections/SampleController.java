@@ -16,7 +16,7 @@ public class SampleController {
     @GetMapping("/hello")
     void hello() {
         sampleService.hello();
-        externalService.externalCall();
+        externalService.externalCall(); // open-in-view is baaad
     }
 
     @GetMapping("/external")
