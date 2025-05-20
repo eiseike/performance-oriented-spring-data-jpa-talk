@@ -2,39 +2,47 @@ package com.example.connections;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 
 @Service
 public class SampleService {
-    private final AnotherService anotherService;
-    private final PersonRepository personRepository;
-    private final ExternalService externalService;
 
-    public SampleService(AnotherService anotherService, PersonRepository personRepository, ExternalService externalService) {
-        this.anotherService = anotherService;
-        this.personRepository = personRepository;
-        this.externalService = externalService;
-    }
+  private final AnotherService anotherService;
+  private final PersonRepository personRepository;
+  private final ExternalService externalService;
+  private final TransactionTemplate transactionTemplate;
 
-    @Transactional
-    public void hello() {
-        System.out.println(personRepository.findAll());
-    }
+  public SampleService(AnotherService anotherService, PersonRepository personRepository,
+      ExternalService externalService,
+      TransactionTemplate transactionTemplate) {
+    this.anotherService = anotherService;
+    this.personRepository = personRepository;
+    this.externalService = externalService;
+    this.transactionTemplate = transactionTemplate;
+  }
 
-    @Transactional
-    public void withExternalServiceCall() {
-        externalService.externalCall();
-        System.out.println(personRepository.findAll());
-    }
+  @Transactional
+  public void hello() {
+    System.out.println(personRepository.findAll());
+  }
 
-    @Transactional
-    public void withExternalServiceCallAfter() {
-        System.out.println(personRepository.findAll());
-        externalService.externalCall();
-    }
+  @Transactional
+  public void withExternalServiceCall() {
+    externalService.externalCall();
+    System.out.println(personRepository.findAll());
+  }
 
-    @Transactional
-    public void withNestedTransaction() {
-        System.out.println(personRepository.findAll());
-        anotherService.runsInNewTransaction();
-    }
+  public void withExternalServiceCallAfter() {
+    transactionTemplate.executeWithoutResult( // sometimes @Transactional is too greedy
+        s -> System.out.println(personRepository.findAll()));
+    externalService.externalCall();
+  }
+
+
+  public void withNestedTransaction() {
+    transactionTemplate.executeWithoutResult( // sometimes @Transactional is too broad
+        s -> System.out.println(personRepository.findAll()));
+    anotherService.runsInNewTransaction(); // for example when this is a  @Transactional(propagation = Propagation.REQUIRES_NEW)
+    // call which sleeps for 400ms, which means without the transaction template personRepository.findAll() would take at least 400ms
+  }
 }
