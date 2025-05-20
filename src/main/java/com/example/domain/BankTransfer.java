@@ -6,6 +6,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Version;
 
 @Entity
 public class BankTransfer {
@@ -15,6 +16,9 @@ public class BankTransfer {
     }
     @Id
     private String id;
+
+    @Version
+    private Long version;
 
     private String reference;
 
