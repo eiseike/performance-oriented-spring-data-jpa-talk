@@ -25,72 +25,36 @@ public class BankTransferService {
     Hibernate:select bt1_0.id,
        bt1_0.value,
        bt1_0.currency_code,
-       bt1_0.receiver_id,
+       r1_0.id,
+       r1_0.first_name,
+       r1_0.iban,
+       r1_0.last_name,
        bt1_0.reference,
-       bt1_0.sender_id,
+       s1_0.id,
+       s1_0.first_name,
+       s1_0.iban,
+       s1_0.last_name,
        bt1_0.state,
        bt1_0.version
 from bank_transfer bt1_0
-         left join account s1_0 on s1_0.id = bt1_0.sender_id
+         join account r1_0 on r1_0.id = bt1_0.receiver_id
+         join account s1_0 on s1_0.id = bt1_0.sender_id
 where s1_0.id = ?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
 
-      very baaaaaaaaaad
+      very goooooooood
 
-      why it is happened: bankTransferRepository.findBySenderId only joins to @ManyToOne Account sender to filter the returned BankTransfers;
-      but these are managed and in the map every BankTransfer object gets its own @ManyToOne Account receiver in a separate query.
-      It is a Nasty N+1 problem.
+      why it is happened: bankTransferRepository.findBySenderId only joined to @ManyToOne Account sender to filter the returned BankTransfers;
+      but these were managed and in the map every BankTransfer object got its own @ManyToOne Account receiver in a separate query.
+      this caused a Nasty N+1 problem.
+      But with explicit join fetch commands in the repository we asked Hibernate to join the receiver as well:
+
+          @Query("SELECT bt FROM BankTransfer bt join fetch bt.receiver join fetch bt.sender WHERE bt.sender.id = :senderId")
+          List<BankTransfer> findBySenderId(String senderId);
+
+      this way we get the BankTransfer objects with their @ManyToOne Account receiver and sender objects in one query.
+
+      to avoid N+1 problems it is also a ggod general rule of thumb to change the fetch type of the @ManyToOne to lazy.
+
 
      */
   }
