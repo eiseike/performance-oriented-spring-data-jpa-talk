@@ -21,8 +21,8 @@ public class RegisterBankTransferUseCase {
 
     @Transactional
     public void execute(String bankTransferId, String reference, String senderId, String receiverId, Amount amount) {
-        Account sender = accountRepository.findByIdOrThrow(senderId);
-        Account receiver = accountRepository.findByIdOrThrow(receiverId);
+        Account sender = accountRepository.getReferenceById(senderId);
+        Account receiver = accountRepository.getReferenceById(receiverId);
 
         BankTransfer bankTransfer = new BankTransfer(bankTransferId, reference, sender, receiver, amount);
         bankTransferRepository.save(bankTransfer);
@@ -31,11 +31,11 @@ public class RegisterBankTransferUseCase {
 
         @Transactional : the Accounts being managed after findByIdOrThrow returns
         @Version in BankTransfer : can be decided if bankTransfer is new on save() even with specified @Id (altough one more column, but it's also helps with optimistic locking automatically)
-        Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.first_name,a1_0.iban,a1_0.last_name from account a1_0 where a1_0.id=?
-Hibernate: insert into bank_transfer (value,currency_code,receiver_id,reference,sender_id,state,version,id) values (?,?,?,?,?,?,?,?)
+        using JpaRepository's getReferenceById() instead of findByIdOrThrow() to avoid loading the entity from the database eagerly, and use it when save() is called lazily
 
-        is NOT THAT baaaaaad
+        Hibernate: insert into bank_transfer (value,currency_code,receiver_id,reference,sender_id,state,version,id) values (?,?,?,?,?,?,?,?)
+
+        is goooood
          */
     }
 }
